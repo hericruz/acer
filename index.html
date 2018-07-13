@@ -85,9 +85,6 @@ if (isset($_SESSION["user"])) {
           method:"POST",
           data:{user:user, pass:pass},
           cache:"false",
-          beforeSend:function() {
-            $('#login').val("Conectando...");
-          },
           success:function(data) {
             $('#login').val("Login");
             if (data=="1") {
