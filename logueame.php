@@ -2,7 +2,7 @@
 
 session_start();
 
-$connect = mysqli_connect("sql9.freesqldatabase.com:3306","sql9247393","eyM8VvRxwW","sql9247393");
+$connect = mysqli_connect("sql9.freesqldatabase.com","sql9247393","eyM8VvRxwW","sql9247393");
 
 if(isset($_POST["user"]) && isset($_POST["pass"])){
   $user = mysqli_real_escape_string($connect, $_POST["user"]);
