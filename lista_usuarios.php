@@ -8,7 +8,7 @@ if(!isset($_SESSION["user"])){
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Reparaciones</title>
+    <title>Usuarios</title>
     <meta charset="utf-8">
     <meta name="format-detection" content="telephone=no">
     <link rel="icon" href="images/favicon.ico" type="image/x-icon">
@@ -25,7 +25,7 @@ if(!isset($_SESSION["user"])){
     <div class="page">
       <!--
       ========================================================
-      							HEADER
+                    HEADER
       ========================================================
       
       
@@ -82,19 +82,20 @@ if(!isset($_SESSION["user"])){
                     
                       <li ><img src="images/usuario.png" align="rigth"></li>
                       <li><a > <?php echo $_SESSION["user"]; ?></a></li>
-                       <li ><?php echo '<a href="index.php">Cerrar sesión</a>' ?></li>
+                      <li ><?php echo '<a href="index.php">Cerrar sesión</a>' ?></li>
+                      
                     
             </nav>
           </div>
         </div>
       </header>
-    <body>
+  
 
-    <div class="container-fluid">
+  < <div class="container-fluid">
   <div class="row">
     <div class="col-md-12">
       <h3>
-        Lista de equipos para reparación
+        Lista de usuarios  registrados
       </h3>
       <table class="table">
         <thead>
@@ -103,53 +104,36 @@ if(!isset($_SESSION["user"])){
               #
             </th>
             <th>
-            Marca
+              Usuario
             </th>
             <th>
-              Modelo
+              Password 
             </th>
             <th>
-              Falla
-            </th>
-            <th>
-              Accesorios
-            </th>
-              <th>
-              Fecha/Entrada
-            </th>
-              <th>
-              Fecha/Salida
-            </th>
-              <th>
-             Costo/Reparación 
-            </th>
-             <th>
-             Cliente 
+              Email
             </th>
           </tr>
         </thead>
 
+
     <?php 
     include ("abrir_conexion.php");
-    $sql="SELECT * from reparaciones";
+    $sql="SELECT * from login";
     $result=mysqli_query($conexion,$sql);
 
     while($mostrar=mysqli_fetch_array($result)){
      ?>
-
+ <tbody>
     <tr>
-      <td><?php echo $mostrar['codigo'] ?></td>
-      <td><?php echo $mostrar['Marca'] ?></td>
-      <td><?php echo $mostrar['Modelo'] ?></td>
-      <td><?php echo $mostrar['Falla'] ?></td>
-      <td><?php echo $mostrar['accesorios'] ?></td>
-      <td><?php echo $mostrar['fecha_entrada'] ?></td>
-      <td><?php echo $mostrar['fecha_salida'] ?></td>
-      <td><?php echo $mostrar['costo'] ?></td>
-      <td><?php echo $mostrar['codigo_cliente'] ?></td>
+      <td><?php echo $mostrar['id'] ?></td>
+      <td><?php echo $mostrar['user'] ?></td>
+      <td><?php echo $mostrar['password'] ?></td>
+      <td><?php echo $mostrar['email'] ?></td>
+   
       <td>
-        <a href="modificar_reparaciones.php?id=<?php echo  "{$mostrar['codigo']}"?>"><img src="images/editar.png"></a></td>
-      <td> <a href="delete_reparaciones.php?id=<?php echo  "{$mostrar['codigo']}"?>"><img src="images/eliminar.png"></a></td>
+        <a href="modificar_usuario.php?id=<?php echo  "{$mostrar['id']}"?>"><img src="images/editar.png"></a></td>
+      <td> 
+        <a href="delete_usuario.php?id=<?php echo  "{$mostrar['id']}"?>"><img src="images/eliminar.png"></a></td>
     </tr>
   <?php 
   }

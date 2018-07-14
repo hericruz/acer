@@ -78,7 +78,7 @@ if(!isset($_SESSION["user"])){
                     
                       <li ><img src="images/usuario.png" align="rigth"></li>
                       <li><a ><?php echo $_SESSION["user"]; ?></a></li>
-                      <li ><?php echo '<a href="logout.php">Cerrar sesión</a>' ?></li>
+                      <li ><?php echo '<a href="index.php">Cerrar sesión</a>' ?></li>
                     
             </nav>
           </div>

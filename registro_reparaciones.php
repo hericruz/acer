@@ -85,7 +85,7 @@ if(!isset($_SESSION["user"])){
                     
                       <li ><img src="images/usuario.png" align="rigth"></li>
                       <li><a > <?php echo $_SESSION["user"]; ?></a></li>
-                       <li ><?php echo '<a href="index.html">Cerrar sesión</a>' ?></li>
+                       <li ><?php echo '<a href="index.php">Cerrar sesión</a>' ?></li>
                     
             </nav>
           </div>
@@ -178,12 +178,11 @@ if(!isset($_SESSION["user"])){
         $fecha_sal = $_POST['fecha_sal'];
         $costo = $_POST['costo'];
         $cliente = $_POST['cliente'];
-      
+     
         
-                   $result = ("INSERT INTO reparaciones (codigo,Marca,Modelo,Falla,accesorios,fecha_entrada,fecha_salida,costo,codigo_cliente) values 
-                    (' ','$marca','$modelo','$falla','$accesorios','$fecha_ent','$fecha_sal','$costo','$cliente') ");
-                   echo ($result);
-                  mysqli_query($conexion, $result);
+       $conexion->query ("INSERT INTO reparaciones (codigo,Marca,Modelo,Falla,accesorios,fecha_entrada,fecha_salida,costo,codigo_cliente) values 
+                    ('',$marca','$modelo','$falla','$accesorios','$fecha_ent','$fecha_sal','$costo','$cliente') ");
+           
                  
         include("cerrar_conexion.php");
 

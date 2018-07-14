@@ -96,6 +96,8 @@ if(!isset($_SESSION["user"])){
                       <li ><a href="./">Ayuda</a></li>
                     
                       <li ><img src="images/usuario.png" align="rigth"></li>
+                      <li><a > <?php echo $_SESSION["user"]; ?></a></li>
+                      <li ><?php echo '<a href="index.php">Cerrar sesión</a>' ?></li>
                      
                     
             </nav>

@@ -5,10 +5,27 @@ if(!isset($_SESSION["user"])){
   header("location:login.php");
 }
 ?>
+
+<?php
+    include("abrir_conexion.php");
+    $id=$_GET["id"];
+
+    $sql = "SELECT id, user, password, email FROM login WHERE id = '$id' ";
+    $result=mysqli_query($conexion, $sql);
+
+    while ($registro = mysqli_fetch_array($result))
+    {
+      $id = $registro['id'];
+      $nombre = $registro["user"];
+      $apellidos = $registro['password'];
+      $tel = $registro['email'];
+    }
+
+  ?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Reparaciones</title>
+    <title>USuarios</title>
     <meta charset="utf-8">
     <meta name="format-detection" content="telephone=no">
     <link rel="icon" href="images/favicon.ico" type="image/x-icon">
@@ -19,18 +36,14 @@ if(!isset($_SESSION["user"])){
     <script src="js/jquery.js"></script>
     <script src="js/jquery-migrate-1.2.1.js"></script>
     <script src="js/device.min.js"></script>
+    <link href="css2/bootstrap.min.css" rel="stylesheet">
+    <link href="css2/style.css" rel="stylesheet">
+
   </head>
 
   <body>
     <div class="page">
-      <!--
-      ========================================================
-      							HEADER
-      ========================================================
-      
-      
-      -->
-      <header>
+  <header>
         <div class="container">
           <div class="brand">
            <img src="images/logo.png">
@@ -39,10 +52,11 @@ if(!isset($_SESSION["user"])){
         <div id="stuck_container" class="stuck_container">
           <div class="container">
             <nav class="nav">
+          
               <ul data-type="navbar" class="sf-menu">
                 <li ><a href="home.php">Home</a>
                 </li>
-                  <li class="active"><a href="">Registro</a>
+                <li class="active"><a href="" >Registros</a>  
                    <ul>
                     <li><a href="#"><img src="images/productos.png">Producto</a>
                       <ul>
@@ -50,10 +64,10 @@ if(!isset($_SESSION["user"])){
                           <li><a href="registrar_productos.php"><img src="images/editar.png">Registrar</a></li>
                         </ul>
                       </li>
-                     <li><a href="#"><img src="images/clientes.png">Clientes</a>
+                     <li class="active"><a href="#"><img src="images/clientes.png">Clientes</a>
                       <ul>
                           <li><a href="lista_clientes.php"><img src="images/ver.png">Ver</a></li>
-                          <li><a href="registrar_cliente.php"><img src="images/editar.png">Registrar</a></li>
+                          <li><a href="registrar_cliente.php" class="active"><img src="images/editar.png">Registrar</a></li>
                         </ul>
                       </li>
                        <li><a href="#"><img src="images/reparaciones.png">Reparaciones</a>
@@ -82,85 +96,42 @@ if(!isset($_SESSION["user"])){
                     
                       <li ><img src="images/usuario.png" align="rigth"></li>
                       <li><a > <?php echo $_SESSION["user"]; ?></a></li>
-                       <li ><?php echo '<a href="index.php">Cerrar sesión</a>' ?></li>
+                      <li ><?php echo '<a href="index.php">Cerrar sesión</a>' ?></li>
+                     
                     
             </nav>
           </div>
         </div>
       </header>
-    <body>
-
-    <div class="container-fluid">
+<h3>Editando  de usuario</h3>
+<div class="container-fluid">
   <div class="row">
     <div class="col-md-12">
-      <h3>
-        Lista de equipos para reparación
-      </h3>
-      <table class="table">
-        <thead>
-          <tr>
-            <th>
-              #
-            </th>
-            <th>
-            Marca
-            </th>
-            <th>
-              Modelo
-            </th>
-            <th>
-              Falla
-            </th>
-            <th>
-              Accesorios
-            </th>
-              <th>
-              Fecha/Entrada
-            </th>
-              <th>
-              Fecha/Salida
-            </th>
-              <th>
-             Costo/Reparación 
-            </th>
-             <th>
-             Cliente 
-            </th>
-          </tr>
-        </thead>
-
-    <?php 
-    include ("abrir_conexion.php");
-    $sql="SELECT * from reparaciones";
-    $result=mysqli_query($conexion,$sql);
-
-    while($mostrar=mysqli_fetch_array($result)){
-     ?>
-
-    <tr>
-      <td><?php echo $mostrar['codigo'] ?></td>
-      <td><?php echo $mostrar['Marca'] ?></td>
-      <td><?php echo $mostrar['Modelo'] ?></td>
-      <td><?php echo $mostrar['Falla'] ?></td>
-      <td><?php echo $mostrar['accesorios'] ?></td>
-      <td><?php echo $mostrar['fecha_entrada'] ?></td>
-      <td><?php echo $mostrar['fecha_salida'] ?></td>
-      <td><?php echo $mostrar['costo'] ?></td>
-      <td><?php echo $mostrar['codigo_cliente'] ?></td>
-      <td>
-        <a href="modificar_reparaciones.php?id=<?php echo  "{$mostrar['codigo']}"?>"><img src="images/editar.png"></a></td>
-      <td> <a href="delete_reparaciones.php?id=<?php echo  "{$mostrar['codigo']}"?>"><img src="images/eliminar.png"></a></td>
-    </tr>
-  <?php 
-  }
-   ?>
-          </tr>
-        </tbody>
-      </table>
+      <form  method="GET" action="actualizar_usuario.php" >
+        <div class="form-group">
+          <input type="text" class="form-control" name="id" value="<?php echo  $id ?>">
+          <label for="codigo">
+          Usuario
+          </label>
+          <input type="text" class="form-control" name="nombre" value="<?php echo $nombre ?>">
+           <label for="codigo">
+          Password
+          </label>
+          <input type="text" class="form-control" name="apellidos" value="<?php echo $apellidos?>">
+          <label for="codigo">
+          Correo
+          </label>
+          <input type="telephone" class="form-control" name="telefono" value="<?php echo $tel ?>">
+           <label for="codigo">
+          
+        </div>
+       <center><input type="submit" value="Actualizar" name="btn_registra" class="btn btn-success"/></center>
+ </form>
     </div>
   </div>
 </div>
-    </div>
     <script src="js/script.js"></script>
   </body>
+
 </html>
+
